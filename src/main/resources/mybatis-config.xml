@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <settings>
+    	<!-- log4j日志加载 -->
+    	<setting name="logImpl" value="STDOUT_LOGGING" />
+    	<!-- 二级缓存 -->
+    	<setting name="cacheEnabled" value="true"/>
+    	<!-- 
+    		自动映射java到mysql的字段 
+    		例：userId->user_id
+    	 -->
+    	<setting name="mapUnderscoreToCamelCase" value="true"/>
+    	
+    	<!-- 对象工厂 -->
+    	<setting name="proxyFactory" value="CGLIB"/>
+    	<!-- 懒加载 -->
+    	<setting name="lazyLoadingEnabled" value="true"/>
+    	
+    </settings>
+   
+   <!-- 分页器 PageHelper-->
+    <plugins>
+    	<plugin interceptor="com.github.pagehelper.PageHelper">
+        	<property name="dialect" value="mysql"/>
+        	
+        	<!--  -->
+        	<property name="offsetAsPageNum" value="true"/>
+        	
+        	<property name="rowBoundsWithCount" value="true"/>
+        	
+        	<property name="pageSizeZero" value="true"/>
+    	</plugin>
+    </plugins>
+    
+</configuration>

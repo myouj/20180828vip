@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ma.vip.dao.RankDao">
+
+	<!-- public List<Rank> selectAll(); -->
+	<select id="selectAll" resultType="com.ma.vip.entity.Rank">
+		select * from vip_rank order by no
+	</select>
+
+
+</mapper>

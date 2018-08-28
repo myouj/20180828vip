@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ma.vip.dao.ConsumeDao">
+
+	<select id="select" resultType="com.ma.vip.entity.Consume">
+		select * from vip_consume where ${key} = #{value}
+	</select>
+	
+	<!-- public List<Consume> findConsumeByVipId(String id); -->
+	<select id="findConsumeByVipId" resultType="com.ma.vip.entity.Consume">
+		select * from vip_consume where vip_id = #{vipid} and flag = 0
+	</select>
+	
+	<insert id="insertConsumeWithVipCode">
+		<selectKey resultType="java.lang.String" order="BEFORE" keyProperty="vipid">
+			select id from vip_detail where code = #{code }
+		</selectKey>
+		insert into 
+			vip_consume(id,vip_id,orderno,amount,operator_id,remark,flag)
+		values(#{consume.id},#{vipid},#{consume.orderno},#{consume.amount},
+				#{consume.operatorId},#{consume.remark},#{consume.flag})
+	</insert>
+	
+	<!-- public void selectConsumeByVipCode(String code); -->
+	<select id="selectConsumeByVipCode" resultType="com.ma.vip.entity.Consume">
+		select * from vip_consume where vip_id = (select id from vip_detail where code = #{code})
+	</select>
+	
+	<!-- public void updateFlag(String id); -->
+	<update id="updateFlag">
+		update vip_consume set flag = '1' where id = #{id}
+	</update>
+
+</mapper>
